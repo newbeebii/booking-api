@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Input Data</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Tambah Layanan / Lapangan</h2>
+      <p>Isi formulir di bawah ini untuk menambahkan data baru.</p>
+
+      <form>
+        <!-- 1. Name (Nama) -->
+        <div class="form-group">
+          <label for="name">Nama Item / Layanan</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Masukkan nama..."
+            required
+          />
+        </div>
+        <!-- 2. Type (Tipe / Kategori) -->
+        <div class="form-group">
+          <label for="type">Tipe / Kategori</label>
+          <select id="type" name="type" required>
+            <option value="" disabled selected>-- Pilih Tipe --</option>
+            <option value="Minisoccer">Minisoccer</option>
+            <option value="Futsal">Futsal</option>
+            <option value="Tennis">Tennis</option>
+            <option value="Padel">Padel</option>
+            <option value="Gedung">Gedung</option>
+          </select>
+        </div>
+
+        <!-- 3. Price Per Hour (Harga Per Jam) -->
+        <div class="form-group">
+          <label for="price_per_hour">Harga Per Jam</label>
+          <div class="input-prefix">
+            <span>Rp</span>
+            <input
+              type="number"
+              id="price_per_hour"
+              name="price_per_hour"
+              placeholder="0"
+              min="0"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- 4. Description (Deskripsi) -->
+        <div class="form-group">
+          <label for="description">Deskripsi</label>
+          <textarea
+            id="description"
+            name="description"
+            placeholder="Tuliskan deskripsi rinci di sini..."
+          ></textarea>
+        </div>
+
+        <!-- Tombol Simpan -->
+        <button type="submit" class="btn-submit">Simpan Data</button>
+      </form>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

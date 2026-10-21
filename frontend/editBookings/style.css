@@ -1,0 +1,26 @@
+/* Base Style & Background Grid Pattern */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0A0F1C;
+  color: #ffffff;
+}
+
+.hero-bg {
+  background: 
+    radial-gradient(circle at top right, rgba(0, 200, 83, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at bottom left, rgba(0, 200, 83, 0.05) 0%, transparent 40%),
+    #0A0F1C;
+}
+
+/* Custom Input Focus State */
+.input-focus:focus {
+  border-color: #00C853;
+  box-shadow: 0 0 0 1px #00C853;
+}
+
+/* Custom Picker Icon Color (Dark Mode Support) */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) hue-rotate(90deg);
+  cursor: pointer;
+}

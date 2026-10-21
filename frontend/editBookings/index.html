@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Booking - FieldPro</title>
+  
+  <!-- Tailwind CSS & FontAwesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  
+  <!-- Custom Style Terpisah -->
+  <link rel="stylesheet" href="style.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              green: '#00C853',
+              dark: '#0A0F1C',
+              card: '#111827',
+              border: '#1F2A3A',
+              muted: '#6B7A99',
+              red: '#FF3B30',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="hero-bg min-h-screen flex flex-col">
+
+  <!-- NAVIGATION BAR -->
+  <header class="border-b border-brand-border bg-brand-dark/80 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-brand-green rounded-lg flex items-center justify-center">
+          <i class="fa-solid fa-bolt text-brand-dark text-sm"></i>
+        </div>
+        <span class="text-xl font-bold text-white">Field<span class="text-brand-green">Pro</span></span>
+      </div>
+      <nav class="hidden md:flex items-center gap-6">
+        <a href="#" class="text-brand-muted hover:text-white text-sm transition-colors">Dashboard</a>
+        <a href="../bookings/index.html" class="text-white text-sm font-medium">Jadwal</a>
+        <a href="../tambahBookings/index.html" class="text-brand-muted hover:text-white text-sm transition-colors">Tambah Booking</a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <button class="w-8 h-8 rounded-full border border-brand-border flex items-center justify-center overflow-hidden">
+          <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="Avatar" class="w-full h-full object-cover">
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="max-w-7xl mx-auto px-6 py-10 flex-1 w-full text-white">
+    <form id="editForm">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- LEFT COLUMN: INPUT FORM -->
+        <div class="lg:col-span-2 space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h1 class="text-3xl font-extrabold tracking-tight mb-1">Edit Booking</h1>
+              <p class="text-brand-muted text-sm">Perbarui informasi reservasi lapangan di bawah ini.</p>
+            </div>
+            <a href="../bookings/index.html" class="text-brand-muted hover:text-white text-sm flex items-center gap-2 transition-colors">
+              <i class="fa-solid fa-arrow-left text-xs"></i> Kembali
+            </a>
+          </div>
+
+          <!-- Input Row 1: Status & Lapangan -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-medium text-brand-muted mb-2">Status Booking</label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-brand-green">
+                  <i class="fa-solid fa-circle-check"></i>
+                </span>
+                <select id="status" class="w-full bg-brand-card border border-brand-border text-white text-sm rounded-xl pl-10 pr-4 py-3 appearance-none focus:outline-none input-focus transition-all">
+                  <option value="pending" <?= $current_status === 'pending' ? 'selected' : '' ?>Pending</option>
+                  <option value="confirmed" <?= $current_status === 'confirmed' ? 'selected' : '' ?>Confirmed</option>
+                  <option value="cancelled" <?= $current_status === 'cancelled' ? 'selected' : '' ?>Cancelled</option>
+                </select>
+                <span class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-brand-muted">
+                  <i class="fa-solid fa-chevron-down text-xs"></i>
+                </span>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-brand-muted mb-2">Pilih Lapangan</label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-brand-green">
+                  <i class="fa-solid fa-futbol"></i>
+                </span>
+                <input type="text" id="field_name" class="w-full bg-brand-card border border-brand-border text-white text-sm rounded-xl pl-10 pr-4 py-3 focus:outline-none input-focus transition-all" required />
+              </div>
+            </div>
+          </div>
+
+          <!-- Input Row 2: Customer & Phone -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-medium text-brand-muted mb-2">Nama Customer</label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-brand-green">
+                  <i class="fa-solid fa-user"></i>
+                </span>
+                <input type="text" id="customer_name" class="w-full bg-brand-card border border-brand-border text-white text-sm rounded-xl pl-10 pr-4 py-3 focus:outline-none input-focus transition-all" required />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-brand-muted mb-2">No. HP</label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-brand-green">
+                  <i class="fa-solid fa-phone"></i>
+                </span>
+                <input type="text" id="customer_phone" class="w-full bg-brand-card border border-brand-border text-white text-sm rounded-xl pl-10 pr-4 py-3 focus:outline-none input-focus transition-all" required />
+              </div>
+            </div>
+          </div>
+
+          <!-- DETAIL JADWAL CARD -->
+          <div class="bg-brand-card/50 border border-brand-border rounded-2xl p-5 space-y-4">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-brand-green">Detail Jadwal</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-xs font-medium text-brand-muted mb-2">Tanggal</label>
+                <input type="date" id="booking_date" class="w-full bg-brand-dark border border-brand-border text-white text-sm rounded-xl px-4 py-3 focus:outline-none input-focus transition-all custom-calendar-icon" required />
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-brand-muted mb-2">Jam Mulai</label>
+                <input type="time" id="start_time" class="w-full bg-brand-dark border border-brand-border text-white text-sm rounded-xl px-4 py-3 focus:outline-none input-focus transition-all custom-time-icon" required />
+              </div>
+              <div>
+                <label class="block text-xs font-medium text-brand-muted mb-2">Jam Selesai</label>
+                <input type="time" id="end_time" class="w-full bg-brand-dark border border-brand-border text-white text-sm rounded-xl px-4 py-3 focus:outline-none input-focus transition-all custom-time-icon" required />
+              </div>
+            </div>
+          </div>
+
+          <!-- ACTION BUTTONS -->
+          <div class="flex items-center gap-4 pt-2">
+            <button type="submit" class="flex-1 bg-brand-green hover:bg-emerald-500 text-brand-dark font-bold py-3.5 px-6 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer">
+              <i class="fa-solid fa-floppy-disk"></i> Perbarui Booking
+            </button>
+            <a href="../bookings/index.html" class="bg-brand-card hover:bg-brand-border border border-brand-border text-white font-semibold py-3.5 px-6 rounded-xl transition-all">
+              Batal
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: SIDEBAR RINGKASAN -->
+        <div class="space-y-6">
+          <div class="bg-brand-card border border-brand-border rounded-2xl p-6 space-y-6">
+            <div class="flex items-center justify-between">
+              <h3 class="font-bold text-lg">Ringkasan</h3>
+              <span id="summaryBadge" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-orange-500/10 text-orange-500 border border-orange-500/20">
+                PENDING
+              </span>
+            </div>
+
+            <div class="space-y-4 text-sm">
+              <div class="flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-brand-dark flex items-center justify-center text-brand-green border border-brand-border mt-0.5">
+                  <i class="fa-solid fa-location-dot text-xs"></i>
+                </div>
+                <div>
+                  <p class="text-[10px] text-brand-muted uppercase font-semibold">Lokasi</p>
+                  <p id="summaryField" class="font-medium">-</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-brand-dark flex items-center justify-center text-brand-green border border-brand-border mt-0.5">
+                  <i class="fa-regular fa-clock text-xs"></i>
+                </div>
+                <div>
+                  <p class="text-[10px] text-brand-muted uppercase font-semibold">Jadwal</p>
+                  <p id="summarySchedule" class="font-medium">-</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <div class="w-7 h-7 rounded-lg bg-brand-dark flex items-center justify-center text-brand-green border border-brand-border mt-0.5">
+                  <i class="fa-regular fa-user text-xs"></i>
+                </div>
+                <div>
+                  <p class="text-[10px] text-brand-muted uppercase font-semibold">Customer</p>
+                  <p id="summaryCustomer" class="font-medium">-</p>
+                </div>
+              </div>
+            </div>
+
+            <hr class="border-brand-border" />
+
+            <div>
+              <p class="text-xs text-brand-muted mb-1">Estimasi Harga</p>
+              <p class="text-2xl font-extrabold text-brand-green"></p>
+              <p class="text-[10px] text-brand-muted mt-1">*Berdasarkan durasi 1 jam</p>
+            </div>
+
+            <!-- INFO EDIT BOX -->
+            <div class="bg-brand-dark/60 border border-brand-border rounded-xl p-4 text-xs text-brand-muted space-y-1">
+              <div class="flex items-center gap-1.5 text-brand-green font-semibold mb-1">
+                <i class="fa-solid fa-circle-info"></i> INFO EDIT
+              </div>
+              <p>ID Booking: #<span id="bookingIdText">-</span></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="max-w-7xl mx-auto px-6 py-8 border-t border-brand-border mt-auto w-full">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-brand-muted text-xs">© 2025 FieldPro Admin Panel. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="#" class="text-brand-muted hover:text-white text-xs transition-colors">Help Center</a>
+        <a href="#" class="text-brand-muted hover:text-white text-xs transition-colors">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

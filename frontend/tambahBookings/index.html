@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tambah Booking</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page">
+      <div class="form-section">
+        <h2>Tambah Booking Baru</h2>
+        <p>Isi formulir di bawah ini untuk membuat booking baru.</p>
+
+        <form>
+          <div class="form-group">
+            <label for="field_id">Pilih Lapangan</label>
+            <select id="field_id" name="field_id" required>
+              <option value="" disabled selected>-- Pilih Lapangan --</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="customer_name">Nama Customer</label>
+              <input
+                type="text"
+                id="customer_name"
+                name="customer_name"
+                placeholder="Masukkan nama..."
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="customer_phone">No. HP</label>
+              <input
+                type="text"
+                id="customer_phone"
+                name="customer_phone"
+                placeholder="08xxxxxxxxxx"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="schedule-box">
+            <h3>Detail Jadwal</h3>
+            <div class="form-row three">
+              <div class="form-group">
+                <label for="booking_date">Tanggal</label>
+                <input
+                  type="date"
+                  id="booking_date"
+                  name="booking_date"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="start_time">Jam Mulai</label>
+                <input type="time" id="start_time" name="start_time" required />
+              </div>
+              <div class="form-group">
+                <label for="end_time">Jam Selesai</label>
+                <input type="time" id="end_time" name="end_time" required />
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit">Simpan Booking</button>
+        </form>
+      </div>
+
+      <div class="summary-section">
+        <h3>Ringkasan Booking</h3>
+
+        <div class="summary-item">
+          <span class="icon">📍</span>
+          <div>
+            <div class="summary-label">Lokasi</div>
+            <div class="summary-value" id="summaryLocation">Belum dipilih</div>
+          </div>
+        </div>
+
+        <div class="summary-item">
+          <span class="icon">🕐</span>
+          <div>
+            <div class="summary-label">Jadwal</div>
+            <div class="summary-value" id="summarySchedule">
+              Pilih tanggal & jam
+            </div>
+          </div>
+        </div>
+
+        <div class="summary-item">
+          <span class="icon">👤</span>
+          <div>
+            <div class="summary-label">Customer</div>
+            <div class="summary-value" id="summaryCustomer">Tamu</div>
+          </div>
+        </div>
+
+        <div class="price-row">
+          <div>
+            <span>Estimasi Harga</span>
+            <p class="price-note">*Harga akhir berdasarkan durasi</p>
+          </div>
+          <span class="price" id="summaryPrice">Rp 0</span>
+        </div>
+
+        <div class="tips-box">
+          <strong>💡 Tips Cepat</strong>
+          <p>
+            Durasi standar booking adalah 1 jam. Pastikan untuk mengecek jadwal
+            bentrok di dashboard.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
